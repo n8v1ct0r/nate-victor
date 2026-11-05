@@ -139,11 +139,11 @@ export function render(c: Content): string {
   <nav class="nav" id="site-nav" aria-label="Sections">
     <ul class="nav-list mono">${nav.map(([id, label], i) => `<li><a href="#${id}" data-spy="${id}"><span class="nav-n" aria-hidden="true">0${i + 1}</span>${label}</a></li>`).join("")}</ul>
     <div class="nav-sheet-foot">
-      <a class="sheet-book" ${ext(c.contact.book.href)}><i aria-hidden="true"></i>${esc(c.contact.book.label)}${newTab}</a>
+      <a class="sheet-book" ${ext(c.contact.book.href)}>${esc(c.contact.book.label)}${newTab}</a>
       <a class="sheet-mail" href="mailto:${esc(c.contact.email)}">Email ${icon.arrow}</a>
     </div>
   </nav>
-  <a class="book" ${ext(c.contact.book.href)}><i aria-hidden="true"></i>${esc(c.contact.book.label)}${newTab}</a>
+  <a class="book" ${ext(c.contact.book.href)}>${esc(c.contact.book.label)}${newTab}</a>
   <button class="menu-btn mono" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-btn><span data-menu-label>Menu</span><i aria-hidden="true"></i></button>
 </header>
 
@@ -210,7 +210,7 @@ export function render(c: Content): string {
       ${eyebrow(3, c.timeline.eyebrow)}
       <div class="sec-head">
         <h2 class="sec-h" id="tl-h">${esc(c.timeline.title)}</h2>
-        <div class="sec-side"><p class="sec-dek">${esc(c.timeline.dek)}</p></div>
+        ${c.timeline.dek ? `<div class="sec-side"><p class="sec-dek">${esc(c.timeline.dek)}</p></div>` : ""}
       </div>
       <div class="log-wrap">
         <span class="log-rail" aria-hidden="true"><i data-rail></i></span>
@@ -229,10 +229,10 @@ export function render(c: Content): string {
         <div class="about-text">
           <h2 class="sec-h" id="about-h">${esc(c.about.title)}</h2>
           ${c.about.text.map((p) => `<p>${esc(p)}</p>`).join("")}
-          <div class="about-row">
+          ${c.about.interests.length ? `<div class="about-row">
             <h3 class="about-label mono">${esc(c.about.interestsLabel)}</h3>
             <ul class="chips">${interests}</ul>
-          </div>
+          </div>` : ""}
           ${c.about.reading ? `<div class="about-row">
             <h3 class="about-label mono">${esc(c.about.reading.label)}</h3>
             <p class="reading"><cite>${esc(c.about.reading.title)}</cite> <span>${esc(c.about.reading.by)}</span></p>
@@ -257,7 +257,7 @@ export function render(c: Content): string {
             <span class="sr-only" role="status" aria-live="polite" data-copy-status></span>
           </div>
           <ul class="contact-links">
-            <li><a class="contact-book" ${ext(c.contact.book.href)}><i aria-hidden="true"></i>${esc(c.contact.book.label)}${newTab} ${icon.arrow}</a></li>
+            <li><a class="contact-book" ${ext(c.contact.book.href)}>${esc(c.contact.book.label)}${newTab} ${icon.arrow}</a></li>
             ${links}
           </ul>
         </div>

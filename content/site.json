@@ -44,7 +44,7 @@
         "demoUrl": "https://race-engineer-tau.vercel.app",
         "codeUrl": "https://github.com/n8v1ct0r/race-engineer",
         "featured": true,
-        "focus": "70% 78%"
+        "focus": "0% 100%"
       },
       {
         "id": "argus",
@@ -67,7 +67,7 @@
         "data": "Public drive, some simulated",
         "demoUrl": "https://photoncar.vercel.app",
         "codeUrl": "https://github.com/n8v1ct0r/photoncar",
-        "focus": "26% 70%"
+        "focus": "0% 70%"
       },
       {
         "id": "imperium",
@@ -89,7 +89,7 @@
         "data": "Offline demo, no account",
         "demoUrl": "https://claude-learner.vercel.app",
         "codeUrl": "https://github.com/n8v1ct0r/claude-learner",
-        "focus": "50% 58%"
+        "focus": "50% 30%"
       },
       {
         "id": "usvc",
@@ -100,7 +100,7 @@
         "data": "Sample data",
         "demoUrl": "https://usvc-concept.vercel.app",
         "codeUrl": "https://github.com/n8v1ct0r/usvc-concept",
-        "focus": "78% 52%"
+        "focus": "30% 20%"
       }
     ],
     "moreTitle": "Rough drafts on GitHub",
@@ -124,17 +124,17 @@
   "timeline": {
     "eyebrow": "Timeline",
     "title": "So far.",
-    "dek": "The short version, oldest first.",
+    "dek": "",
     "entries": [
       {
         "when": "2019",
         "title": "Fantasy sports app",
-        "text": "Taught myself JavaScript and built a betting app for my friends and their dads. Apple rejected it. I was 13 with a laptop, not a licensed company."
+        "text": "Taught myself JavaScript and built a betting app for my friends and their dads. Apple rejected it because I was 13, not a licensed company."
       },
       {
         "when": "2019 to 2021",
         "title": "Online stores",
-        "text": "Built and ran them myself. Most lost to competitors."
+        "text": "Built and ran them myself, and most lost to competitors."
       },
       {
         "when": "2021 to 2022",
@@ -144,12 +144,7 @@
       {
         "when": "2024",
         "title": "Life insurance",
-        "text": "Got licensed and built a sales team. Then chargebacks hit and it fell apart."
-      },
-      {
-        "when": "2024",
-        "title": "Smart Frost Film",
-        "text": "Resold film that switches glass from clear to frosted with a remote. The supplier never delivered."
+        "text": "Got licensed and built a sales team, until chargebacks hit and it fell apart."
       },
       {
         "when": "2024",
@@ -173,17 +168,11 @@
     "eyebrow": "About",
     "title": "I'm Nate.",
     "text": [
-      "I'm 20 and live in Red Bank, New Jersey. I skipped college and taught myself everything since."
+      "I'm 20 and live in Red Bank, New Jersey. I skipped college and kept teaching myself.",
+      "Away from the keyboard, it's F1, chess, basketball, MMA, the gym and philosophy."
     ],
     "interestsLabel": "Away from the keyboard",
-    "interests": [
-      "F1",
-      "Chess",
-      "Basketball",
-      "MMA",
-      "Fitness",
-      "Philosophy"
-    ],
+    "interests": [],
     "reading": {
       "label": "Rereading",
       "title": "The Book of Elon",
