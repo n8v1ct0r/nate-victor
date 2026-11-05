@@ -15,7 +15,7 @@ type Quest = {
   featured?: boolean;
 };
 type CodeOnly = { id: string; name: string; line: string; accent: string; codeUrl: string };
-type Entry = { when: string; title: string; text: string; lesson?: string; now?: boolean };
+type Entry = { when: string; title: string; text: string; now?: boolean };
 type Link = { label: string; href: string };
 
 export type Content = {
@@ -109,7 +109,6 @@ export function render(c: Content): string {
           <h3 class="e-title">${esc(e.title)}${e.now ? ' <span class="e-now mono">Now</span>' : ""}</h3>
           <p class="e-text">${esc(e.text)}</p>
         </div>
-        ${e.lesson ? `<p class="e-lesson"><span class="mono">Lesson</span><span>${esc(e.lesson)}</span></p>` : ""}
       </li>`)
     .join("");
 

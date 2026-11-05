@@ -118,19 +118,17 @@
   "timeline": {
     "eyebrow": "Timeline",
     "title": "The short version.",
-    "dek": "Plenty of flops. Every one made the next build faster.",
+    "dek": "From a fantasy sports app at 13 to MedStrata.",
     "entries": [
       {
         "when": "2019",
         "title": "Fantasy sports app",
-        "text": "At 13, I taught myself JavaScript and built a fantasy sports app for my friends and their dads. Apple rejected it.",
-        "lesson": "Rules can kill a product that works."
+        "text": "At 13, I taught myself JavaScript and built a fantasy sports app for my friends and their dads. Apple rejected it."
       },
       {
         "when": "2019 to 2021",
         "title": "Online stores",
-        "text": "Built and ran a few. Most of them lost to competition.",
-        "lesson": "In crowded markets, competition kills you before customers do."
+        "text": "Built and ran a few. Most of them lost to competition."
       },
       {
         "when": "2021 to 2022",
@@ -140,8 +138,7 @@
       {
         "when": "2024",
         "title": "Life insurance",
-        "text": "Got licensed and built a small sales team. Then the chargebacks hit.",
-        "lesson": "Revenue isn't real until the chargebacks clear."
+        "text": "Got licensed and built a small sales team. Then the chargebacks hit."
       },
       {
         "when": "2024",
@@ -151,8 +148,7 @@
       {
         "when": "2024",
         "title": "Smart Frost Film",
-        "text": "Resold film that turns glass frosted with a remote. The supplier never delivered.",
-        "lesson": "Never sell what you can't deliver."
+        "text": "Resold film that turns glass frosted with a remote. The supplier never delivered."
       },
       {
         "when": "2024",
