@@ -209,7 +209,7 @@ if (clips.length && !still && !slowNet) {
     toggle.hidden = false;
     const render = () => {
       toggle.setAttribute("aria-pressed", String(paused));
-      root.dataset.previews = paused ? "off" : "on";
+      root.dataset.clips = paused ? "off" : "on";
     };
     toggle.addEventListener("click", () => {
       paused = !paused;

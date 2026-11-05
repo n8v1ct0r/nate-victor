@@ -662,7 +662,7 @@ html:not(.js) .menu-btn, html:not(.js) .hero-meta { display: none; }
 }
 
 /* Previews paused by the visitor: posters only. */
-html[data-previews="off"] .qc-clip { display: none; }
+html[data-clips="off"] .qc-clip { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
