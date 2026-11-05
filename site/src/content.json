@@ -3,18 +3,18 @@
   "name": "Nate Victor",
   "meta": {
     "title": "Nate Victor",
-    "description": "Nate Victor. Founder and CEO of MedStrata AI. Started building and going on side quests at 13.",
+    "description": "Nate Victor, founder and CEO of MedStrata AI, building the fully autonomous back office for independent pharmacies. Going on side quests since 13.",
     "url": "https://nate-victor.com"
   },
   "hero": {
-    "line": "Started building & going on side quests since 13 years old.",
+    "line": "Started building & going on side quests at 13.",
     "questsWord": "side quests",
     "roles": [
       "Founder",
       "Engineer",
       "Side quester"
     ],
-    "cta": "See the sidequests"
+    "cta": "Pick a side quest"
   },
   "place": {
     "city": "Red Bank, NJ",
@@ -31,85 +31,91 @@
   },
   "sidequests": {
     "eyebrow": "Sidequests",
-    "title": "Things I build to learn something new.",
+    "title": "Things I build for fun.",
     "dek": "Most of them run in your browser, so go poke around.",
     "items": [
       {
         "id": "race-engineer",
         "name": "AI Race Engineer",
-        "line": "Two real qualifying laps, replayed side by side. See which corners won the lap and which gave time away.",
+        "line": "A ghost replay of two real Formula 1 qualifying laps. Radio messages pop up where time was won or lost.",
         "accent": "#B6F23A",
         "status": "Live",
-        "data": "Recorded FastF1 session",
+        "data": "Recorded qualifying laps",
         "demoUrl": "https://race-engineer-tau.vercel.app",
         "codeUrl": "https://github.com/n8v1ct0r/race-engineer",
-        "featured": true
+        "featured": true,
+        "focus": "70% 78%"
       },
       {
         "id": "argus",
         "name": "Argus",
-        "line": "Replay a day of quakes, fires, flights and satellites on a globe. Click any sentence in the brief to see the record behind it.",
+        "line": "Quakes, fires, flights and satellites on a globe. Each line of its summary flies you to the event behind it.",
         "accent": "#3EC6FF",
         "status": "In progress",
         "data": "Recorded public feeds",
         "demoUrl": "https://argus-seven-eta.vercel.app",
         "codeUrl": null,
-        "featured": true
+        "featured": true,
+        "focus": "56% 44%"
       },
       {
         "id": "photoncar",
         "name": "Photoncar",
-        "line": "Car data you can check. Click a hard stop or a 0 to 60 run and see the exact readings behind it.",
+        "line": "A commute from a public dataset, laid out like a rally roadbook. Click a hard brake and the car's readings light up.",
         "accent": "#FFC83D",
         "status": "Live",
-        "data": "Recorded public drive",
+        "data": "Public drive, some simulated",
         "demoUrl": "https://photoncar.vercel.app",
-        "codeUrl": "https://github.com/n8v1ct0r/photoncar"
+        "codeUrl": "https://github.com/n8v1ct0r/photoncar",
+        "focus": "26% 70%"
       },
       {
         "id": "imperium",
         "name": "Imperium",
-        "line": "Simulated drones search for a raft on their own. When one wants to leave its route, it has to ask you first.",
+        "line": "A simulated drone spots a possible raft and asks permission to go look. Ignore it, and the answer is no.",
         "accent": "#8B7BFF",
         "status": "In progress",
         "data": "Simulated mission",
         "demoUrl": "https://imperium-ecru.vercel.app",
-        "codeUrl": null
+        "codeUrl": null,
+        "focus": "52% 84%"
       },
       {
         "id": "claude-learner",
         "name": "Claude Learner",
-        "line": "Prep for the Claude Certified Architect exam in a few minutes a day. Answer questions, then explain the idea back in one sentence.",
+        "line": "A study app for the Claude Certified Architect exam. Each lesson ends with you explaining the idea back.",
         "accent": "#E8693A",
         "status": "In progress",
-        "data": "Offline demo",
+        "data": "Offline demo, no account",
         "demoUrl": "https://claude-learner.vercel.app",
-        "codeUrl": "https://github.com/n8v1ct0r/claude-learner"
+        "codeUrl": "https://github.com/n8v1ct0r/claude-learner",
+        "focus": "50% 58%"
       },
       {
         "id": "usvc",
         "name": "USVC for iOS",
-        "line": "What if USVC had an iPhone app? An unofficial concept you can tap through in your browser, on sample data.",
+        "line": "An unofficial iPhone app concept for USVC. Invest pretend money in private tech companies.",
         "accent": "#F2F2F2",
         "status": "In progress",
         "data": "Sample data",
         "demoUrl": "https://usvc-concept.vercel.app",
-        "codeUrl": "https://github.com/n8v1ct0r/usvc-concept"
+        "codeUrl": "https://github.com/n8v1ct0r/usvc-concept",
+        "focus": "78% 52%"
       }
     ],
-    "moreTitle": "More on GitHub",
+    "moreTitle": "Rough drafts on GitHub",
     "more": [
       {
         "id": "chisel",
         "name": "Chisel",
-        "line": "Describe a part in plain English. Chisel writes the CAD code, runs it, and fixes its own mistakes.",
+        "line": "An AI agent that turns a sentence into a 3D part file. If the shape comes out broken, it tries again.",
         "accent": "#FF4D0A",
         "codeUrl": "https://github.com/n8v1ct0r/chisel.ai"
       },
       {
         "id": "sherlock",
         "name": "Sherlock Holmes AI",
-        "line": "Ask a research question. It splits it into smaller ones, searches the web, and writes up a report with its sources.",
+        "line": "Text a research question to your own Telegram bot. It searches the web and sends back a report with links.",
         "accent": "#C6F432",
         "codeUrl": "https://github.com/n8v1ct0r/sherlock-holmes.ai"
       }
@@ -117,53 +123,48 @@
   },
   "timeline": {
     "eyebrow": "Timeline",
-    "title": "The short version.",
-    "dek": "From a fantasy sports app at 13 to MedStrata.",
+    "title": "So far.",
+    "dek": "The short version, oldest first.",
     "entries": [
       {
         "when": "2019",
         "title": "Fantasy sports app",
-        "text": "At 13, I taught myself JavaScript and built a fantasy sports app for my friends and their dads. Apple rejected it."
+        "text": "Taught myself JavaScript and built a betting app for my friends and their dads. Apple rejected it. I was 13 with a laptop, not a licensed company."
       },
       {
         "when": "2019 to 2021",
         "title": "Online stores",
-        "text": "Built and ran a few. Most of them lost to competition."
+        "text": "Built and ran them myself. Most lost to competitors."
       },
       {
         "when": "2021 to 2022",
-        "title": "Facebook ads for real estate agents",
-        "text": "Figured out ads for a few agents I knew, then sold them the leads. My first real sales."
+        "title": "Real estate ads",
+        "text": "Older friends in real estate couldn't get Facebook ads to work, so I figured it out and sold them leads."
       },
       {
         "when": "2024",
         "title": "Life insurance",
-        "text": "Got licensed and built a small sales team. Then the chargebacks hit."
-      },
-      {
-        "when": "2024",
-        "title": "Skipped college",
-        "text": "Graduated high school and kept building instead."
+        "text": "Got licensed and built a sales team. Then chargebacks hit and it fell apart."
       },
       {
         "when": "2024",
         "title": "Smart Frost Film",
-        "text": "Resold film that turns glass frosted with a remote. The supplier never delivered."
+        "text": "Resold film that switches glass from clear to frosted with a remote. The supplier never delivered."
       },
       {
         "when": "2024",
         "title": "Insuraflow AI",
-        "text": "Claude got me coding again. I built an AI system for insurance agents, for the wrong audience."
+        "text": "Claude got me coding again. I built an AI system for life insurance agents, but they were the wrong audience."
       },
       {
         "when": "2025",
         "title": "Empower Sleep",
-        "text": "Booked meetings for a healthcare sales team and learned how healthcare buys."
+        "text": "Booked meetings for our account executive and learned to sell into healthcare."
       },
       {
         "when": "2025 to now",
         "title": "MedStrata AI",
-        "text": "Started building the back office I wish every independent pharmacy had.",
+        "text": "This one's the main quest.",
         "now": true
       }
     ]
@@ -172,15 +173,15 @@
     "eyebrow": "About",
     "title": "I'm Nate.",
     "text": [
-      "I'm 20 and live in Red Bank, New Jersey. I taught myself to code at 13 and skipped college to keep building."
+      "I'm 20 and live in Red Bank, New Jersey. I skipped college and taught myself everything since."
     ],
-    "interestsLabel": "Off the clock",
+    "interestsLabel": "Away from the keyboard",
     "interests": [
       "F1",
       "Chess",
       "Basketball",
       "MMA",
-      "The gym",
+      "Fitness",
       "Philosophy"
     ],
     "reading": {
@@ -192,7 +193,7 @@
   "contact": {
     "eyebrow": "Contact",
     "title": "Say hi.",
-    "text": "Building something, curious about pharmacy, or just want to talk F1? I'm easy to reach.",
+    "text": "Building something, or just want to talk F1? Email me or book a call.",
     "email": "nate.victor28@gmail.com",
     "book": {
       "label": "Book a call",

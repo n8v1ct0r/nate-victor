@@ -8,7 +8,7 @@
     <meta name="color-scheme" content="dark" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="preload" href="/avatar/hero-still.webp" as="image" media="(min-width: 541px)" fetchpriority="high" />
+    <link rel="preload" as="image" imagesrcset="/avatar/hero-still-480.webp 480w, /avatar/hero-still.webp 960w" imagesizes="(max-width: 960px) min(100vw, 640px), min(54vw, 900px)" fetchpriority="high" />
     <script>
       // Before first paint: decide whether anything animates, so the avatar never flashes.
       (function () { var d = document.documentElement, c = navigator.connection; d.classList.add("js");

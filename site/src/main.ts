@@ -8,11 +8,11 @@ root.classList.add("js");
 const still = !root.classList.contains("motion");
 const finePointer = matchMedia("(hover: hover) and (pointer: fine)");
 
-/* Hero: the avatar forms out of particles after first paint, so the text is always the LCP. */
+/* Hero: the avatar forms out of particles right after first paint, so the text is always the
+   LCP. It doesn't wait for window load (lazy posters below the fold would hold that back);
+   startHero awaits the still image's decode itself. */
 const hero = document.querySelector<HTMLElement>(".hero");
-const bootHero = () => { if (hero) startHero(hero, !still); };
-if (document.readyState === "complete") requestAnimationFrame(() => setTimeout(bootHero, 0));
-else addEventListener("load", () => setTimeout(bootHero, 0), { once: true });
+requestAnimationFrame(() => setTimeout(() => { if (hero) startHero(hero, !still); }, 0));
 
 /* Local time in Red Bank, NJ. Updates on the minute. */
 const clock = document.querySelector<HTMLTimeElement>("[data-clock]");
@@ -40,31 +40,38 @@ if (bar) {
 if (bar && menuBtn) {
   const nav = bar.querySelector<HTMLElement>("nav")!;
   const small = matchMedia("(max-width: 960px)");
-  // While the sheet is closed on small screens its links must not be tabbable.
-  const syncInert = () => { if (small.matches && bar.dataset.menu !== "open") nav.setAttribute("inert", ""); else nav.removeAttribute("inert"); };
+  const behind = [...document.querySelectorAll<HTMLElement>("main, footer, .skip")];
+  // While the sheet is closed on small screens its links must not be tabbable; while it is
+  // open, everything behind it is inert so focus and screen readers stay in the sheet.
+  const sync = () => {
+    const open = bar.dataset.menu === "open";
+    if (small.matches && !open) nav.setAttribute("inert", ""); else nav.removeAttribute("inert");
+    behind.forEach((el) => el.toggleAttribute("inert", small.matches && open));
+  };
   const setMenu = (open: boolean, focusBack = false) => {
     bar.dataset.menu = open ? "open" : "closed";
     root.dataset.menu = open ? "open" : "closed";
     menuBtn.setAttribute("aria-expanded", String(open));
     if (menuLabel) menuLabel.textContent = open ? "Close" : "Menu";
-    syncInert();
+    sync();
     if (open) nav.querySelector<HTMLElement>("a")?.focus({ preventScroll: true });
     else if (focusBack) menuBtn.focus();
   };
   menuBtn.addEventListener("click", () => setMenu(bar.dataset.menu !== "open"));
-  nav.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => { if (small.matches) setMenu(false); }));
+  // Any link in the bar (sheet links, brand) closes the sheet on the way to its target.
+  bar.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => { if (small.matches && bar.dataset.menu === "open") setMenu(false); }));
   addEventListener("keydown", (e) => {
     if (bar.dataset.menu !== "open") return;
     if (e.key === "Escape") { setMenu(false, true); return; }
     if (e.key !== "Tab") return;
-    // Keep focus inside the bar (menu button + sheet) while the sheet is open.
-    const items = [menuBtn, ...nav.querySelectorAll<HTMLElement>("a")];
+    // Focus cycles through the sheet links (DOM order), then the Close button, then back.
+    const items = [...nav.querySelectorAll<HTMLElement>("a"), menuBtn];
     const i = items.indexOf(document.activeElement as HTMLElement);
     if (e.shiftKey && i <= 0) { e.preventDefault(); items[items.length - 1].focus(); }
-    else if (!e.shiftKey && i === items.length - 1) { e.preventDefault(); items[0].focus(); }
+    else if (!e.shiftKey && (i === items.length - 1 || i < 0)) { e.preventDefault(); items[0].focus(); }
   });
   small.addEventListener("change", () => setMenu(false));
-  syncInert();
+  sync();
 }
 
 /* Scrollspy: the nav marks the section you are reading. */
@@ -97,6 +104,7 @@ if (!still && "IntersectionObserver" in window) {
     revealables.forEach((el) => { if (el.getBoundingClientRect().top > innerHeight) { el.classList.add("reveal"); io.observe(el); } });
   };
   addEventListener("scroll", arm, { once: true, passive: true });
+  addEventListener("focusin", (e) => (e.target as Element).closest?.(".reveal:not(.in)")?.classList.add("in"));
 }
 
 /* Timeline rail fills as you read; each dot lights when the rail reaches it. */
@@ -121,34 +129,65 @@ if (rail && log) {
 
 /* Sidequest previews. Real screen recordings, loaded only when needed:
    - fine pointer: featured clips play while on screen, the rest play on hover
-   - touch: the card most in view plays, one at a time
-   - reduced motion or Save-Data: posters only */
-type Clip = { card: HTMLElement; video: HTMLVideoElement; frame: HTMLElement; bar: HTMLElement | null; featured: boolean; ratio: number; hovered: boolean };
+   - touch: the clip most in view plays, one at a time, after a short pause in scrolling
+   - reduced motion, Save-Data or a slow connection: posters only
+   A "Pause previews" button stops them all, and the choice is remembered. */
+type Clip = { video: HTMLVideoElement; frame: HTMLElement; bar: HTMLElement | null; featured: boolean; ratio: number; hovered: boolean };
 const clips: Clip[] = [];
 document.querySelectorAll<HTMLElement>(".qc").forEach((card) => {
   const video = card.querySelector<HTMLVideoElement>("video[data-clip]");
   const frame = card.querySelector<HTMLElement>(".qc-media");
   if (!video || !frame) return;
-  clips.push({ card, video, frame, bar: frame.querySelector<HTMLElement>(".qc-progress i"), featured: card.classList.contains("qc-feature"), ratio: 0, hovered: false });
+  const clip: Clip = { video, frame, bar: frame.querySelector<HTMLElement>(".qc-progress i"), featured: card.classList.contains("qc-feature"), ratio: 0, hovered: false };
+  clips.push(clip);
+  card.addEventListener("pointerenter", (e) => { if (e.pointerType !== "touch") { clip.hovered = true; decide(); } });
+  card.addEventListener("pointerleave", () => { clip.hovered = false; decide(); });
 });
 
-if (!still && clips.length) {
-  let ticking = 0;
-  const progress = () => {
-    ticking = 0;
-    let any = false;
-    clips.forEach((c) => {
-      if (c.video.paused || !c.video.duration) return;
-      any = true;
-      c.bar?.style.setProperty("--p", (c.video.currentTime / c.video.duration).toFixed(4));
-    });
-    if (any) ticking = requestAnimationFrame(progress);
-  };
-  const play = (c: Clip) => {
-    if (!c.video.isConnected || !c.video.paused) return;
-    c.video.play().then(() => { if (!ticking) ticking = requestAnimationFrame(progress); }).catch(() => {});
-  };
-  const pause = (c: Clip) => { if (!c.video.paused) c.video.pause(); c.frame.dataset.playing = "false"; };
+const conn = (navigator as Navigator & { connection?: { effectiveType?: string } }).connection;
+const slowNet = /(^|-)2g$|^3g$/.test(conn?.effectiveType ?? "");
+const toggle = document.querySelector<HTMLButtonElement>("[data-previews]");
+const PREF = "previews";
+let paused = false;
+try { paused = localStorage.getItem(PREF) === "off"; } catch { /* storage blocked: default on */ }
+const previewsOn = () => !still && !slowNet && !paused;
+
+let ticking = 0;
+const progress = () => {
+  ticking = 0;
+  let any = false;
+  clips.forEach((c) => {
+    if (c.video.paused || !c.video.duration) return;
+    any = true;
+    c.bar?.style.setProperty("--p", (c.video.currentTime / c.video.duration).toFixed(4));
+  });
+  if (any) ticking = requestAnimationFrame(progress);
+};
+const play = (c: Clip) => {
+  if (!c.video.isConnected || !c.video.paused) return;
+  c.video.play().then(() => { if (!ticking) ticking = requestAnimationFrame(progress); }).catch(() => {});
+};
+const pause = (c: Clip) => { if (!c.video.paused) c.video.pause(); c.frame.dataset.playing = "false"; };
+
+let dwell = 0;
+let lastBest: Clip | null = null;
+function decide() {
+  clearTimeout(dwell);
+  if (!previewsOn() || document.hidden) { clips.forEach(pause); return; }
+  if (finePointer.matches) {
+    clips.forEach((c) => ((c.featured && c.ratio >= 0.5) || (c.hovered && c.ratio > 0) ? play(c) : pause(c)));
+    return;
+  }
+  const best = clips.reduce<Clip | null>((b, c) => (c.ratio >= 0.6 && (!b || c.ratio > b.ratio) ? c : b), null);
+  clips.forEach((c) => { if (c !== best) pause(c); });
+  if (!best) { lastBest = null; return; }
+  // On touch, wait until the scroll settles on a card so a quick flick doesn't download every clip.
+  if (best === lastBest && !best.video.paused) return;
+  lastBest = best;
+  dwell = window.setTimeout(() => play(best), 450);
+}
+
+if (clips.length && !still && !slowNet) {
   clips.forEach((c) => {
     c.video.addEventListener("playing", () => { c.frame.dataset.playing = "true"; });
     // If neither source can play, drop the video and keep the poster.
@@ -156,26 +195,30 @@ if (!still && clips.length) {
       if (c.video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) c.video.remove();
     }));
   });
-  const decide = () => {
-    if (finePointer.matches) {
-      clips.forEach((c) => ((c.featured ? c.ratio >= 0.5 : false) || (c.hovered && c.ratio > 0) ? play(c) : pause(c)));
-    } else {
-      const best = clips.reduce<Clip | null>((b, c) => (c.ratio >= 0.6 && (!b || c.ratio > b.ratio) ? c : b), null);
-      clips.forEach((c) => (c === best ? play(c) : pause(c)));
-    }
-  };
   if ("IntersectionObserver" in window) {
+    // Measure the recording itself, not the whole card, and ignore the strip under the fixed bar.
     const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { const c = clips.find((x) => x.card === e.target); if (c) c.ratio = e.isIntersecting ? e.intersectionRatio : 0; });
+      entries.forEach((e) => { const c = clips.find((x) => x.frame === e.target); if (c) c.ratio = e.isIntersecting ? e.intersectionRatio : 0; });
       decide();
-    }, { threshold: [0, 0.25, 0.5, 0.6, 0.75, 1] });
-    clips.forEach((c) => io.observe(c.card));
+    }, { threshold: [0, 0.25, 0.5, 0.6, 0.75, 0.9, 1], rootMargin: "-64px 0px 0px 0px" });
+    clips.forEach((c) => io.observe(c.frame));
   }
-  clips.forEach((c) => {
-    c.card.addEventListener("pointerenter", (e) => { if (e.pointerType !== "touch") { c.hovered = true; decide(); } });
-    c.card.addEventListener("pointerleave", () => { c.hovered = false; decide(); });
-  });
-  document.addEventListener("visibilitychange", () => { if (document.hidden) clips.forEach(pause); else decide(); });
+  document.addEventListener("visibilitychange", decide);
+
+  if (toggle) {
+    toggle.hidden = false;
+    const render = () => {
+      toggle.setAttribute("aria-pressed", String(paused));
+      root.dataset.previews = paused ? "off" : "on";
+    };
+    toggle.addEventListener("click", () => {
+      paused = !paused;
+      try { localStorage.setItem(PREF, paused ? "off" : "on"); } catch { /* ignore */ }
+      render();
+      decide();
+    });
+    render();
+  }
 
   // A soft light follows the pointer across each card.
   document.querySelectorAll<HTMLElement>(".qc").forEach((card) => {

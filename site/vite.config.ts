@@ -12,6 +12,19 @@ export default defineConfig({
         return html.replace("<!--HEAD-->", renderHead(content)).replace("<!--APP-->", render(content));
       },
     },
+    {
+      name: "preload-display-font",
+      // The hero name is set in Schibsted Grotesk: fetch its latin file alongside the CSS
+      // instead of after it, so the name doesn't sit in the fallback face on slow networks.
+      transformIndexHtml: {
+        order: "post",
+        handler(html, ctx) {
+          const font = Object.keys(ctx.bundle ?? {}).find((f) => /schibsted-grotesk-latin-wght-normal-[\w-]+\.woff2$/.test(f));
+          if (!font) return html;
+          return html.replace("</title>", `</title>\n    <link rel="preload" href="/${font}" as="font" type="font/woff2" crossorigin />`);
+        },
+      },
+    },
   ],
   build: { target: "es2020", assetsInlineLimit: 0 },
 });

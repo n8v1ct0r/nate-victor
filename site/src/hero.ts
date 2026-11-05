@@ -122,7 +122,8 @@ export function startHero(hero: HTMLElement, animate: boolean) {
 
     const ctx = canvas.getContext("2d");
     if (!ctx) throw new Error("2d context unavailable");
-    const dpr = Math.min(2, devicePixelRatio || 1);
+    // 1.5x is plenty for 2px dots and keeps a full-hero canvas cheap on retina screens.
+    const dpr = Math.min(1.5, devicePixelRatio || 1);
     const heroBox = hero.getBoundingClientRect();
     const avBox = avatar.getBoundingClientRect();
     const W = heroBox.width;
@@ -160,7 +161,7 @@ export function startHero(hero: HTMLElement, animate: boolean) {
 
     // Particles never draw over the hero text: clip to the hero minus padded text boxes.
     const pad = small ? 10 : 18;
-    const textBoxes = [...hero.querySelectorAll(".hero-copy h1, .hero-copy .roles, .hero-copy .see")].map((el) => {
+    const textBoxes = [...hero.querySelectorAll(".hero-copy h1, .hero-copy .roles, .hero-copy .hero-acts")].map((el) => {
       const r = el.getBoundingClientRect();
       return [r.left - heroBox.left - pad, r.top - heroBox.top - pad, r.width + pad * 2, r.height + pad * 2] as const;
     });
@@ -176,6 +177,9 @@ export function startHero(hero: HTMLElement, animate: boolean) {
     let t = 0;
     let last = 0;
     let raf = 0;
+    // Slow-device guard: if the first frames come in well under 30fps, skip straight to the
+    // settled still instead of dragging a janky intro out for seconds.
+    const firstGaps: number[] = [];
 
     // Position at progress p along particle i's curve (ease-out cubic), written to out[o], out[o + 1].
     const pointAt = (i: number, p: number, out: Float32Array, o: number) => {
@@ -190,8 +194,21 @@ export function startHero(hero: HTMLElement, animate: boolean) {
     const frame = (now: number) => {
       raf = 0;
       if (!active()) return;
-      t += Math.min(0.05, (now - last) / 1000);
+      const gap = now - last;
       last = now;
+      // Real elapsed time keeps the intro on schedule on slow devices; only a long gap
+      // (tab switch, scroll away) counts as a pause.
+      t += gap > 250 ? 1 / 60 : gap / 1000;
+      if (firstGaps.length < 8) {
+        firstGaps.push(gap);
+        if (firstGaps.length === 8 && firstGaps.slice(2).sort((a, b) => a - b)[3] > 34) {
+          ctx.clearRect(0, 0, W, H);
+          canvas.width = canvas.height = 0;
+          t = END;
+          settle();
+          return;
+        }
+      }
       ctx.clearRect(0, 0, W, H);
       if (t >= FORM) settle();
       if (t >= END) {

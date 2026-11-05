@@ -15,7 +15,7 @@ await page.addStyleTag({
   content: `
     .hero { min-height: 630px; height: 630px; padding-top: 72px; padding-bottom: 40px; }
     .hero-copy { padding-bottom: 56px; }
-    .see { display: none; }
+    .see, .hero-meta { display: none; }
     .bar { border-bottom-color: transparent; }
   `,
 });
