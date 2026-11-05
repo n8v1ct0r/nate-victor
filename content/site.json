@@ -1,173 +1,206 @@
 {
-  "_rules": "Locked copy is verbatim (approved by Nate). No em or en dashes anywhere. Banned words: leverage (verb), delve, landscape, showcase, pivotal, seamless, robust, empower (except 'Empower Sleep'), unlock, transform.",
+  "_rules": "All visible copy lives here. Plain, short, specific. No em or en dashes anywhere. No metrics or numbers that are not needed. Banned words: leverage (verb), delve, landscape, showcase, pivotal, seamless, robust, empower (except 'Empower Sleep'), unlock, transform. Statuses must match reality: 'Live' only when the project is finished and running; 'In progress' otherwise, even if a demo is up.",
   "name": "Nate Victor",
-  "hero": "Nate Victor. Self-taught since 13. No college. 7 ventures started, 5 ended, 2 running. Building until something wins.",
-  "positioning": [
-    "Founder",
-    "Operator",
-    "Engineer",
-    "Side quester",
-    "Reader",
-    "Student for life"
-  ],
-  "building": {
-    "name": "MedStrata AI",
-    "role": "Founder and CEO",
-    "line": "Building the fully autonomous back office for independent pharmacies.",
-    "metric": "1M+ claims analyzed. $23K+ in identified savings and revenue recovery opportunities.",
-    "locked": true
+  "meta": {
+    "title": "Nate Victor",
+    "description": "Nate Victor, founder and CEO of MedStrata AI, building the fully autonomous back office for independent pharmacies. Going on side quests since 13.",
+    "url": "https://nate-victor.com"
   },
-  "sidequests": [
-    {
-      "id": "argus",
-      "n": "01",
-      "name": "Argus",
-      "line": "A live view of Earth with an AI analyst. Every sentence links to the events behind it.",
-      "status": "In progress",
-      "tryUrl": null,
-      "codeUrl": null,
-      "data": "Live public feeds"
-    },
-    {
-      "id": "imperium",
-      "n": "02",
-      "name": "Imperium",
-      "line": "The human control plane for autonomous systems. Humans set intent. Autonomy executes.",
-      "status": "In progress",
-      "tryUrl": null,
-      "codeUrl": null,
-      "data": "Simulated mission"
-    },
-    {
-      "id": "photoncar",
-      "n": "03",
-      "name": "Photoncar",
-      "line": "Edge intelligence for cars. Engine and CAN-bus data become live vehicle state.",
-      "status": "Live",
-      "tryUrl": "https://photoncar.vercel.app",
-      "codeUrl": "https://github.com/n8v1ct0r/photoncar",
-      "data": "Recorded drive"
-    },
-    {
-      "id": "race-engineer",
-      "n": "04",
-      "name": "AI Race Engineer",
-      "line": "Replays real F1 telemetry and shows where the lap time went, corner by corner.",
-      "status": "Live",
-      "tryUrl": "https://race-engineer-tau.vercel.app",
-      "codeUrl": "https://github.com/n8v1ct0r/race-engineer",
-      "data": "Recorded session (FastF1)"
-    },
-    {
-      "id": "claude-learner",
-      "n": "05",
-      "name": "Claude Learner",
-      "line": "Bite-size lessons for learning Claude. 649 practice questions.",
-      "status": "In progress",
-      "tryUrl": null,
-      "codeUrl": null,
-      "data": "Demo mode"
-    },
-    {
-      "id": "usvc",
-      "n": "06",
-      "name": "USVC for iOS",
-      "line": "An unofficial iOS concept for usvc.com. 25 screens. Not affiliated with USVC.",
-      "status": "In progress",
-      "tryUrl": null,
-      "codeUrl": null,
-      "data": "Sample data"
-    }
-  ],
-  "timeline": [
-    {
-      "when": "2025 to now",
-      "name": "MedStrata AI",
-      "text": "Founder and CEO. Building the fully autonomous back office for independent pharmacies. 1M+ claims analyzed and $23K+ in identified savings and revenue recovery opportunities."
-    },
-    {
-      "when": "2025 to now",
-      "name": "Human + Machines",
-      "text": "AI consulting."
-    },
-    {
-      "when": "2025",
-      "name": "SDR, Empower Sleep",
-      "text": "For 4 months, booked 4 to 10 qualified meetings a day for our account executive. Learned to sell into healthcare."
-    },
-    {
-      "when": "2024",
-      "name": "InsureFlow AI",
-      "archived": true,
-      "text": "Claude brought coding back for me. Built an AI operating system for life insurance agents to compete with GoHighLevel. Too ambitious for the wrong audience, and the co-founder relationship ended badly."
-    },
-    {
-      "when": "2024",
-      "name": "Smart Frost Film",
-      "archived": true,
-      "text": "Resold smart film that switches glass from clear to frosted with a remote. Sold 3 customers. The supplier never delivered, and no one else could match the price. Shut it down to focus on building a tech company."
-    },
-    {
-      "when": "2024",
-      "name": "Life insurance agent and team lead",
-      "text": "Got licensed, built a team of 6 agents, and ran our own Facebook ads system. Best month: over $30,000. Then chargebacks hit, and it fell apart."
-    },
-    {
-      "when": "2024",
-      "name": "Graduated high school",
-      "text": "Skipped college. Everything since, I taught myself."
-    },
-    {
-      "when": "2022",
-      "name": "Appointment setter, life insurance",
-      "text": "Booked qualified appointments for a life insurance agent at $100 each."
-    },
-    {
-      "when": "2021 to 2022",
-      "name": "Real estate marketing agency",
-      "text": "A few older friends were real estate agents who couldn't get Facebook ads to bring in leads. I figured it out, then sold them ads and leads. Grew to 12 agent clients and $15K MRR at peak. Built their GoHighLevel CRMs and Zapier automations."
-    },
-    {
-      "when": "2021 to 2022",
-      "name": "Oasis VRX",
-      "text": "First job, at a VR arcade."
-    },
-    {
-      "when": "2019 to 2021",
-      "name": "E-commerce",
-      "archived": true,
-      "text": "Built and ran online stores. Most lost to competition."
-    },
-    {
-      "when": "2019",
-      "name": "Prime High School Fantasy Sports",
-      "archived": true,
-      "text": "At 13, taught myself JavaScript and spent 8 months building a fantasy sports and betting app for my friends and their dads. It worked. Apple rejected it. Betting apps have to come from licensed companies, and I was a 13-year-old with a laptop."
-    }
-  ],
-  "lessons": [
-    "Rules can kill a product that works. I learned that at 13.",
-    "Revenue isn't real until the chargebacks clear.",
-    "In crowded markets, competition kills you before customers do.",
-    "Never sell what you can't deliver.",
-    "Build for people you respect.",
-    "Every flop made the next build faster."
-  ],
-  "about": {
-    "interests": [
-      "Chess",
-      "F1",
-      "MMA",
-      "Fitness",
-      "Basketball",
-      "Philosophy"
+  "hero": {
+    "line": "Started building & going on side quests at 13.",
+    "questsWord": "side quests",
+    "roles": [
+      "Founder",
+      "Engineer",
+      "Side quester"
     ],
-    "location": "Red Bank, NJ"
+    "cta": "Pick a side quest"
   },
-  "closing": "Next: make MedStrata the back office every independent pharmacy runs on.",
-  "footer": {
+  "place": {
+    "city": "Red Bank, NJ",
+    "tz": "America/New_York"
+  },
+  "now": {
+    "eyebrow": "Now",
+    "company": "MedStrata AI",
+    "summary": "Building MedStrata AI",
+    "url": "https://www.medstrata.ai",
+    "urlLabel": "medstrata.ai",
+    "headline": "I'm the founder and CEO of MedStrata AI.",
+    "text": "We're building the fully autonomous back office for independent pharmacies."
+  },
+  "sidequests": {
+    "eyebrow": "Sidequests",
+    "title": "Things I build for fun.",
+    "dek": "Most of them run in your browser, so go poke around.",
+    "items": [
+      {
+        "id": "race-engineer",
+        "name": "AI Race Engineer",
+        "line": "A ghost replay of two real Formula 1 qualifying laps. Radio messages pop up where time was won or lost.",
+        "accent": "#B6F23A",
+        "status": "Live",
+        "data": "Recorded qualifying laps",
+        "demoUrl": "https://race-engineer-tau.vercel.app",
+        "codeUrl": "https://github.com/n8v1ct0r/race-engineer",
+        "featured": true,
+        "focus": "0% 100%"
+      },
+      {
+        "id": "argus",
+        "name": "Argus",
+        "line": "Quakes, fires, flights and satellites on a globe. Each line of its summary flies you to the event behind it.",
+        "accent": "#3EC6FF",
+        "status": "In progress",
+        "data": "Recorded public feeds",
+        "demoUrl": "https://argus-seven-eta.vercel.app",
+        "codeUrl": null,
+        "featured": true,
+        "focus": "56% 44%"
+      },
+      {
+        "id": "photoncar",
+        "name": "Photoncar",
+        "line": "A commute from a public dataset, laid out like a rally roadbook. Click a hard brake and the car's readings light up.",
+        "accent": "#FFC83D",
+        "status": "Live",
+        "data": "Public drive, some simulated",
+        "demoUrl": "https://photoncar.vercel.app",
+        "codeUrl": "https://github.com/n8v1ct0r/photoncar",
+        "focus": "0% 70%"
+      },
+      {
+        "id": "imperium",
+        "name": "Imperium",
+        "line": "A simulated drone spots a possible raft and asks permission to go look. Ignore it, and the answer is no.",
+        "accent": "#8B7BFF",
+        "status": "In progress",
+        "data": "Simulated mission",
+        "demoUrl": "https://imperium-ecru.vercel.app",
+        "codeUrl": null,
+        "focus": "52% 84%"
+      },
+      {
+        "id": "claude-learner",
+        "name": "Claude Learner",
+        "line": "A study app for the Claude Certified Architect exam. Each lesson ends with you explaining the idea back.",
+        "accent": "#E8693A",
+        "status": "In progress",
+        "data": "Offline demo, no account",
+        "demoUrl": "https://claude-learner.vercel.app",
+        "codeUrl": "https://github.com/n8v1ct0r/claude-learner",
+        "focus": "50% 30%"
+      },
+      {
+        "id": "usvc",
+        "name": "USVC for iOS",
+        "line": "An unofficial iPhone app concept for USVC. Invest pretend money in private tech companies.",
+        "accent": "#F2F2F2",
+        "status": "In progress",
+        "data": "Sample data",
+        "demoUrl": "https://usvc-concept.vercel.app",
+        "codeUrl": "https://github.com/n8v1ct0r/usvc-concept",
+        "focus": "30% 20%"
+      }
+    ],
+    "moreTitle": "Rough drafts on GitHub",
+    "more": [
+      {
+        "id": "chisel",
+        "name": "Chisel",
+        "line": "An AI agent that turns a sentence into a 3D part file. If the shape comes out broken, it tries again.",
+        "accent": "#FF4D0A",
+        "codeUrl": "https://github.com/n8v1ct0r/chisel.ai"
+      },
+      {
+        "id": "sherlock",
+        "name": "Sherlock Holmes AI",
+        "line": "Text a research question to your own Telegram bot. It searches the web and sends back a report with links.",
+        "accent": "#C6F432",
+        "codeUrl": "https://github.com/n8v1ct0r/sherlock-holmes.ai"
+      }
+    ]
+  },
+  "timeline": {
+    "eyebrow": "Timeline",
+    "title": "So far.",
+    "dek": "",
+    "entries": [
+      {
+        "when": "2019",
+        "title": "Fantasy sports app",
+        "text": "Taught myself JavaScript and built a betting app for my friends and their dads. Apple rejected it because I was 13, not a licensed company."
+      },
+      {
+        "when": "2019 to 2021",
+        "title": "Online stores",
+        "text": "Built and ran them myself, and most lost to competitors."
+      },
+      {
+        "when": "2021 to 2022",
+        "title": "Real estate ads",
+        "text": "Older friends in real estate couldn't get Facebook ads to work, so I figured it out and sold them leads."
+      },
+      {
+        "when": "2024",
+        "title": "Life insurance",
+        "text": "Got licensed and built a sales team, until chargebacks hit and it fell apart."
+      },
+      {
+        "when": "2024",
+        "title": "Insuraflow AI",
+        "text": "Claude got me coding again. I built an AI system for life insurance agents, but they were the wrong audience."
+      },
+      {
+        "when": "2025",
+        "title": "Empower Sleep",
+        "text": "Booked meetings for our account executive and learned to sell into healthcare."
+      },
+      {
+        "when": "2025 to now",
+        "title": "MedStrata AI",
+        "text": "This one's the main quest.",
+        "now": true
+      }
+    ]
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "I'm Nate.",
+    "text": [
+      "I'm 20 and live in Red Bank, New Jersey. I skipped college and kept teaching myself.",
+      "Away from the keyboard, it's F1, chess, basketball, MMA, the gym and philosophy."
+    ],
+    "interestsLabel": "Away from the keyboard",
+    "interests": [],
+    "reading": {
+      "label": "Rereading",
+      "title": "The Book of Elon",
+      "by": "by Eric Jorgenson"
+    }
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Say hi.",
+    "text": "Building something, or just want to talk F1? Email me or book a call.",
     "email": "nate.victor28@gmail.com",
-    "linkedin": "https://www.linkedin.com/in/nate-victor-886454307/",
-    "github": "https://github.com/n8v1ct0r"
+    "book": {
+      "label": "Book a call",
+      "href": "https://cal.com/nate-eojln1/15min"
+    },
+    "links": [
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/nate-victor-886454307/"
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/n8v1ct0r"
+      }
+    ]
+  },
+  "footer": {
+    "note": "Built with Vite and TypeScript. No framework.",
+    "source": "https://github.com/n8v1ct0r/nate-victor"
   }
 }

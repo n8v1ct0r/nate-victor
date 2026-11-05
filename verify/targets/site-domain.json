@@ -2,29 +2,35 @@
   "name": "site-domain",
   "url": "https://www.nate-victor.com",
   "expect": [
-    "header.bar",
+    "header.bar[data-bar]",
     "h1#hero-title[data-hero]",
-    "section#building article.build",
-    "ol.quests[data-quests] li.quest",
-    "ol.log[data-log] li.entry",
-    "ol.lessons li",
-    "section#about .about img",
-    "section.closing a.cta",
+    "a.h-link[href='#sidequests']",
+    "time.clock[data-clock]",
+    "section#now a.now-card[href='https://www.medstrata.ai']",
+    "ol.cards-feature li.qc.qc-feature",
+    "ol.cards-grid li.qc",
+    "ul.more li.mc",
+    "ol.log[data-log] li.entry.is-now",
+    "section#about .portrait img",
+    "section#contact button[data-copy]",
     "footer.foot[data-footer]"
   ],
   "expectText": [
-    "Nate Victor. Self-taught since 13. No college. 7 ventures started, 5 ended, 2 running. Building until something wins.",
-    "1M+ claims analyzed",
-    "Next: make MedStrata the back office every independent pharmacy runs on."
+    "Nate Victor.",
+    "MedStrata AI"
   ],
   "wowPath": [
     {
-      "hover": "ol.quests[data-quests] li.quest[data-quest='race-engineer'] .q-title",
-      "wait": 700,
-      "expect": "[data-preview][data-open='true'][data-active='race-engineer']"
+      "hover": "li.qc[data-quest='photoncar'] .qc-name",
+      "wait": 1800,
+      "expect": "li.qc[data-quest='photoncar'] .qc-media[data-playing='true']"
     },
     {
-      "expect": "li.quest[data-quest='race-engineer'] a[href='https://race-engineer-tau.vercel.app']"
+      "expect": "li.qc[data-quest='race-engineer'] a.demo[href='https://race-engineer-tau.vercel.app']"
+    },
+    {
+      "click": "button[data-copy]",
+      "expect": "button[data-copy][data-copied='true']"
     }
   ],
   "wowDesktopOnly": true,
