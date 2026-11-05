@@ -1,0 +1,28 @@
+{
+  "name": "site",
+  "url": "https://nate-victor-b.vercel.app",
+  "expect": [
+    "header.bar",
+    "h1#hero-title[data-hero]",
+    "section#building article.build",
+    "ol.quests[data-quests] li.quest",
+    "ol.log[data-log] li.entry",
+    "ol.lessons li",
+    "section#about .about img",
+    "section.closing a.cta",
+    "footer.foot[data-footer]"
+  ],
+  "expectText": [
+    "Nate Victor. Self-taught since 13. No college. 7 ventures started, 5 ended, 2 running. Building until something wins.",
+    "1M+ claims analyzed",
+    "Next: make MedStrata the back office every independent pharmacy runs on."
+  ],
+  "wowPath": [
+    { "hover": "ol.quests[data-quests] li.quest[data-quest='race-engineer'] .q-title", "wait": 700, "expect": "[data-preview][data-open='true'][data-active='race-engineer']" },
+    { "expect": "li.quest[data-quest='race-engineer'] a[href='https://race-engineer-tau.vercel.app']" }
+  ],
+  "wowDesktopOnly": true,
+  "checkLinks": true,
+  "fullPageShot": true,
+  "settleMs": 2500
+}

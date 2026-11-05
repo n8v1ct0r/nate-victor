@@ -1,0 +1,8 @@
+node_modules/
+.env*
+!.env.example
+.vercel/
+verify/**/shots/
+.DS_Store
+.gstack/
+.claude/

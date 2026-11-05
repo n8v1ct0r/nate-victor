@@ -1,0 +1,164 @@
+{
+  "name": "claude-learner",
+  "url": "https://claude-learner.vercel.app",
+  "expect": [
+    "[data-honesty-strip]",
+    "[data-honesty-strip] .strip-label",
+    "[data-honesty-strip] a[href=\"https://nate-victor.com\"]",
+    "[data-testid=\"practice-content-line\"]",
+    ".device #root"
+  ],
+  "expectText": [
+    "NATE VICTOR / SIDEQUEST 05",
+    "DEMO · OFFLINE, NO ACCOUNT",
+    "STEP 1 OF 2",
+    "When is your exam?",
+    "Practice questions written for this app. Not official exam content.",
+    "Independent project. Not affiliated with Anthropic."
+  ],
+  "wowPath": [
+    {
+      "click": "[role=button]:visible:has-text(\"Just exploring for now\")"
+    },
+    {
+      "expect": "text=STEP 2 OF 2 >> visible=true"
+    },
+    {
+      "expect": "text=How much time feels good each day? >> visible=true"
+    },
+    {
+      "click": "[role=button]:visible:has-text(\"10 minutes a day\")"
+    },
+    {
+      "expect": "text=CONCEPT BRIEFING >> visible=true"
+    },
+    {
+      "expect": "text=Know the exam: format and weights >> visible=true"
+    },
+    {
+      "click": "[role=button]:visible:has-text(\"Start 5 decisions\")"
+    },
+    {
+      "expect": "text=DECISION 1 OF 5 >> visible=true"
+    },
+    {
+      "expect": "[role=button]:visible:has-text(\"Split evenly across all five domains regardless of weight\")"
+    },
+    {
+      "click": "[role=button]:visible:has-text(\"Into Agentic Architecture, the highest-weighted domain\")"
+    },
+    {
+      "expect": "text=Correct architecture decision >> visible=true"
+    },
+    {
+      "expect": "text=WHY THIS WINS >> visible=true"
+    },
+    {
+      "expect": "text=SOURCES >> visible=true"
+    },
+    {
+      "click": "role=button[name=\"Continue\"s]"
+    },
+    {
+      "expect": "text=DECISION 2 OF 5 >> visible=true"
+    },
+    {
+      "click": "[role=button]:visible:has-text(\"Aim for about two minutes per question on average\")"
+    },
+    {
+      "click": "role=button[name=\"Continue\"s]"
+    },
+    {
+      "expect": "text=DECISION 3 OF 5 >> visible=true"
+    },
+    {
+      "click": "[role=button]:visible:has-text(\"The five domains carry different weights\")"
+    },
+    {
+      "click": "[role=button]:visible:has-text(\"It has 60 questions with a 120-minute limit\")"
+    },
+    {
+      "click": "role=button[name=\"Check\"s]"
+    },
+    {
+      "click": "role=button[name=\"Continue\"s]"
+    },
+    {
+      "expect": "text=DECISION 4 OF 5 >> visible=true"
+    },
+    {
+      "click": "[role=button]:visible:has-text(\"List the five domains and their weights\")"
+    },
+    {
+      "click": "[role=button]:visible:has-text(\"Rank the domains from heaviest to lightest\")"
+    },
+    {
+      "click": "[role=button]:visible:has-text(\"Allocate the most study time to the 27 percent domain\")"
+    },
+    {
+      "click": "role=button[name=\"Continue\"s]"
+    },
+    {
+      "expect": "text=DECISION 5 OF 5 >> visible=true"
+    },
+    {
+      "click": "[role=button]:visible:has-text(\"Passing is a single scaled score of 720 overall\")"
+    },
+    {
+      "click": "role=button[name=\"Continue\"s]"
+    },
+    {
+      "fill": [
+        "role=textbox[name=\"Your one-sentence explanation\"]",
+        "Put the most prep into Agentic Architecture because the domains carry different weights and it is worth the most points."
+      ]
+    },
+    {
+      "click": "role=button[name=\"Teach it\"]"
+    },
+    {
+      "expect": "text=/Coverage: \\d of 5/ >> visible=true"
+    },
+    {
+      "expect": "[data-testid=\"demo-grading-label\"]"
+    },
+    {
+      "expect": "text=DEMO grading: a simple word match, not Claude. Live grading needs the backend. >> visible=true"
+    },
+    {
+      "click": "role=button[name=\"See how I did\"]"
+    },
+    {
+      "click": "role=button[name=\"Continue\"s]"
+    },
+    {
+      "expect": "text=Lesson complete >> visible=true"
+    },
+    {
+      "expect": "text=/^\\+\\d+$/ >> visible=true"
+    },
+    {
+      "expect": "text=XP >> visible=true"
+    },
+    {
+      "expect": "text=/Teach-back coverage, DEMO grading \\d+%/ >> visible=true"
+    },
+    {
+      "expect": "text=/\\+\\d+ gems/ >> visible=true"
+    },
+    {
+      "expect": "text=1-day streak >> visible=true"
+    },
+    {
+      "click": "role=button[name=\"Done\"s]"
+    },
+    {
+      "expect": "text=1/58 LESSONS >> visible=true"
+    },
+    {
+      "expect": "[data-honesty-strip]"
+    }
+  ],
+  "checkLinks": true,
+  "settleMs": 4000
+}

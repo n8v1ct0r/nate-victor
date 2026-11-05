@@ -1,0 +1,69 @@
+{
+  "name": "photoncar",
+  "url": "https://photoncar.vercel.app",
+  "expect": [
+    "[data-honesty-strip]",
+    "[data-state-line]",
+    "[data-gauges]",
+    "input.deck-scrub",
+    ".deck-ticks .deck-tick",
+    ".box"
+  ],
+  "expectText": [
+    "RECORDED",
+    "SIMULATED",
+    "Not a safety system. Do not use while driving."
+  ],
+  "wowPath": [
+    {
+      "expect": "button.deck-play[aria-pressed='true']"
+    },
+    {
+      "click": "button.deck-play"
+    },
+    {
+      "expect": "button.deck-play[aria-pressed='false']"
+    },
+    {
+      "fill": [
+        "input.deck-scrub",
+        "595"
+      ]
+    },
+    {
+      "wait": 600
+    },
+    {
+      "expect": ".deck-tick.deck-tick-on"
+    },
+    {
+      "expect": ".box.is-selected"
+    },
+    {
+      "expectText": "Box 03"
+    },
+    {
+      "expectText": "09:55.0"
+    },
+    {
+      "fill": [
+        "input.deck-scrub",
+        "400"
+      ]
+    },
+    {
+      "wait": 600
+    },
+    {
+      "expectText": "06:40.0"
+    },
+    {
+      "expectText": "Turning, 0.17 g sideways, at 72 mph."
+    },
+    {
+      "expect": "[data-state-line]"
+    }
+  ],
+  "checkLinks": true,
+  "settleMs": 4000
+}

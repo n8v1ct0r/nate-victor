@@ -1,0 +1,16 @@
+{
+  "name": "variant-c",
+  "url": "https://nate-victor-c.vercel.app",
+  "expect": ["header.hero h1.hero-line", "#sidequests ol.quest-list li.quest", "#timeline ol.tl-list li.tl-row", "footer.footer#contact"],
+  "expectText": ["Self-taught since 13", "1M+ claims analyzed", "Next: make MedStrata the back office every independent pharmacy runs on."],
+  "wowPath": [
+    {"expect": "#sidequests li.quest"},
+    {"hover": "#sidequests li.quest[data-index=\"1\"]"},
+    {"wait": 800},
+    {"expect": ".preview.is-open"}
+  ],
+  "wowDesktopOnly": true,
+  "checkLinks": true,
+  "fullPageShot": true,
+  "settleMs": 2500
+}

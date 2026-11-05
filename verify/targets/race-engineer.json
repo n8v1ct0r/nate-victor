@@ -1,0 +1,25 @@
+{
+  "name": "race-engineer",
+  "url": "https://race-engineer-tau.vercel.app",
+  "expect": [
+    "[data-honesty-strip]",
+    ".telemetry .uplot",
+    "svg g[data-cursor-mode]",
+    "[data-team-radio]",
+    "role=region[name=\"Track map\"]"
+  ],
+  "expectText": ["RECORDED · FastF1", "Unofficial. Not affiliated with Formula 1."],
+  "wowPath": [
+    { "expect": "role=region[name=\"Track map\"] >> role=button[name=\"Pause\"]" },
+    { "expect": "[data-radio-overlay]" },
+    { "expect": "[data-radio-call]" },
+    { "click": "[data-radio-overlay]" },
+    { "expect": "[data-radio-call][aria-pressed=\"true\"]" },
+    { "expect": "role=button[name=/^Corner T/][pressed]" },
+    { "expect": "role=region[name=\"Track map\"] >> role=button[name=\"Play\"]" },
+    { "click": "li:last-child > [data-radio-call]" },
+    { "expect": "li:last-child > [data-radio-call][aria-pressed=\"true\"]" }
+  ],
+  "checkLinks": true,
+  "settleMs": 4000
+}

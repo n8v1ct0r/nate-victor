@@ -1,0 +1,13 @@
+{
+  "name": "variant-b",
+  "url": "https://nate-victor-b.vercel.app",
+  "expect": ["h1#hero-title[data-hero]", "ol.quests[data-quests] li.quest", "ol.log[data-log] li.entry", "footer.foot[data-footer]"],
+  "expectText": ["Self-taught since 13", "1M+ claims analyzed", "Next: make MedStrata the back office every independent pharmacy runs on."],
+  "wowPath": [
+    { "hover": "ol.quests[data-quests] li.quest[data-quest='argus']", "wait": 700, "expect": "[data-preview][data-open='true'][data-active='argus']" }
+  ],
+  "wowDesktopOnly": true,
+  "checkLinks": true,
+  "fullPageShot": true,
+  "settleMs": 2500
+}

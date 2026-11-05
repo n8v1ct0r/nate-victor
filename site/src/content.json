@@ -1,0 +1,173 @@
+{
+  "_rules": "Locked copy is verbatim (approved by Nate). No em or en dashes anywhere. Banned words: leverage (verb), delve, landscape, showcase, pivotal, seamless, robust, empower (except 'Empower Sleep'), unlock, transform.",
+  "name": "Nate Victor",
+  "hero": "Nate Victor. Self-taught since 13. No college. 7 ventures started, 5 ended, 2 running. Building until something wins.",
+  "positioning": [
+    "Founder",
+    "Operator",
+    "Engineer",
+    "Side quester",
+    "Reader",
+    "Student for life"
+  ],
+  "building": {
+    "name": "MedStrata AI",
+    "role": "Founder and CEO",
+    "line": "Building the fully autonomous back office for independent pharmacies.",
+    "metric": "1M+ claims analyzed. $23K+ in identified savings and revenue recovery opportunities.",
+    "locked": true
+  },
+  "sidequests": [
+    {
+      "id": "argus",
+      "n": "01",
+      "name": "Argus",
+      "line": "A live view of Earth with an AI analyst. Every sentence links to the events behind it.",
+      "status": "In progress",
+      "tryUrl": null,
+      "codeUrl": null,
+      "data": "Live public feeds"
+    },
+    {
+      "id": "imperium",
+      "n": "02",
+      "name": "Imperium",
+      "line": "The human control plane for autonomous systems. Humans set intent. Autonomy executes.",
+      "status": "In progress",
+      "tryUrl": null,
+      "codeUrl": null,
+      "data": "Simulated mission"
+    },
+    {
+      "id": "photoncar",
+      "n": "03",
+      "name": "Photoncar",
+      "line": "Edge intelligence for cars. Engine and CAN-bus data become live vehicle state.",
+      "status": "In progress",
+      "tryUrl": "https://photoncar.vercel.app",
+      "codeUrl": null,
+      "data": "Recorded drive"
+    },
+    {
+      "id": "race-engineer",
+      "n": "04",
+      "name": "AI Race Engineer",
+      "line": "Replays real F1 telemetry and shows where the lap time went, corner by corner.",
+      "status": "Live",
+      "tryUrl": "https://race-engineer-tau.vercel.app",
+      "codeUrl": null,
+      "data": "Recorded session (FastF1)"
+    },
+    {
+      "id": "claude-learner",
+      "n": "05",
+      "name": "Claude Learner",
+      "line": "Bite-size lessons for learning Claude. 649 practice questions.",
+      "status": "In progress",
+      "tryUrl": null,
+      "codeUrl": null,
+      "data": "Demo mode"
+    },
+    {
+      "id": "usvc",
+      "n": "06",
+      "name": "USVC for iOS",
+      "line": "An unofficial iOS concept for usvc.com. 25 screens. Not affiliated with USVC.",
+      "status": "In progress",
+      "tryUrl": null,
+      "codeUrl": null,
+      "data": "Sample data"
+    }
+  ],
+  "timeline": [
+    {
+      "when": "2025 to now",
+      "name": "MedStrata AI",
+      "text": "Founder and CEO. Building the fully autonomous back office for independent pharmacies. 1M+ claims analyzed and $23K+ in identified savings and revenue recovery opportunities."
+    },
+    {
+      "when": "2025 to now",
+      "name": "Human + Machines",
+      "text": "AI consulting."
+    },
+    {
+      "when": "2025",
+      "name": "SDR, Empower Sleep",
+      "text": "For 4 months, booked 4 to 10 qualified meetings a day for our account executive. Learned to sell into healthcare."
+    },
+    {
+      "when": "2024",
+      "name": "InsureFlow AI",
+      "archived": true,
+      "text": "Claude brought coding back for me. Built an AI operating system for life insurance agents to compete with GoHighLevel. Too ambitious for the wrong audience, and the co-founder relationship ended badly."
+    },
+    {
+      "when": "2024",
+      "name": "Smart Frost Film",
+      "archived": true,
+      "text": "Resold smart film that switches glass from clear to frosted with a remote. Sold 3 customers. The supplier never delivered, and no one else could match the price. Shut it down to focus on building a tech company."
+    },
+    {
+      "when": "2024",
+      "name": "Life insurance agent and team lead",
+      "text": "Got licensed, built a team of 6 agents, and ran our own Facebook ads system. Best month: over $30,000. Then chargebacks hit, and it fell apart."
+    },
+    {
+      "when": "2024",
+      "name": "Graduated high school",
+      "text": "Skipped college. Everything since, I taught myself."
+    },
+    {
+      "when": "2022",
+      "name": "Appointment setter, life insurance",
+      "text": "Booked qualified appointments for a life insurance agent at $100 each."
+    },
+    {
+      "when": "2021 to 2022",
+      "name": "Real estate marketing agency",
+      "text": "A few older friends were real estate agents who couldn't get Facebook ads to bring in leads. I figured it out, then sold them ads and leads. Grew to 12 agent clients and $15K MRR at peak. Built their GoHighLevel CRMs and Zapier automations."
+    },
+    {
+      "when": "2021 to 2022",
+      "name": "Oasis VRX",
+      "text": "First job, at a VR arcade."
+    },
+    {
+      "when": "2019 to 2021",
+      "name": "E-commerce",
+      "archived": true,
+      "text": "Built and ran online stores. Most lost to competition."
+    },
+    {
+      "when": "2019",
+      "name": "Prime High School Fantasy Sports",
+      "archived": true,
+      "text": "At 13, taught myself JavaScript and spent 8 months building a fantasy sports and betting app for my friends and their dads. It worked. Apple rejected it. Betting apps have to come from licensed companies, and I was a 13-year-old with a laptop."
+    }
+  ],
+  "lessons": [
+    "Rules can kill a product that works. I learned that at 13.",
+    "Revenue isn't real until the chargebacks clear.",
+    "In crowded markets, competition kills you before customers do.",
+    "Never sell what you can't deliver.",
+    "Build for people you respect.",
+    "Every flop made the next build faster."
+  ],
+  "about": {
+    "interests": [
+      "Chess",
+      "F1",
+      "MMA",
+      "Fitness",
+      "Basketball",
+      "Philosophy"
+    ],
+    "location": "Red Bank, NJ"
+  },
+  "closing": "Next: make MedStrata the back office every independent pharmacy runs on.",
+  "footer": {
+    "email": "nate.victor28@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/nate-victor-886454307/",
+    "github": "https://github.com/n8v1ct0r"
+  }
+}

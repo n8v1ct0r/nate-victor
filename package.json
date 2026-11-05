@@ -1,0 +1,13 @@
+{
+  "name": "nate-victor",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "verify": "PLAYWRIGHT_BROWSERS_PATH=0 node verify/run.mjs",
+    "verify:install": "PLAYWRIGHT_BROWSERS_PATH=0 playwright install chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "lighthouse": "13.4.1"
+  }
+}

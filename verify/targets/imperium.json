@@ -1,0 +1,27 @@
+{
+  "name": "imperium",
+  "url": "https://imperium-ecru.vercel.app/",
+  "expect": [
+    "[data-honesty-strip]",
+    "[data-honesty-strip]:has-text('Simulated · fictional mission')",
+    "[aria-label='Needs you']",
+    ".log",
+    "footer .footer-note:has-text('Independent project. Not affiliated with Imperium Defense Group.')"
+  ],
+  "expectText": ["Simulated · fictional mission", "Independent project. Not affiliated with Imperium Defense Group."],
+  "wowPath": [
+    { "expect": "button[aria-label='Approve route deviate for AE-007']" },
+    { "expect": "button[aria-label='Deny route deviate for AE-007']" },
+    { "expect": "[aria-label='Needs you']:has-text('AE-007 asks to leave its search loop')" },
+    { "click": "button[aria-label='Approve route deviate for AE-007']" },
+    { "expect": "[aria-label='Needs you']:has-text('flies the approved route')" },
+    { "expect": "[aria-label='Needs you']:has-text('Signature checked in this browser: valid.')" },
+    { "expect": ".log:has-text('approved by the operator')" },
+    { "expect": ".log:has-text('minted')" },
+    { "expect": ".log:has-text('executed: route changed')" },
+    { "click": "button:has-text('Tamper with the grant')" },
+    { "expect": "[aria-label='Needs you']:has-text('the same signature fails')" }
+  ],
+  "checkLinks": true,
+  "settleMs": 4000
+}
