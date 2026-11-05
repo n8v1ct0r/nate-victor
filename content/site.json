@@ -102,14 +102,14 @@
       {
         "id": "chisel",
         "name": "Chisel",
-        "line": "An AI agent for CAD. Describe a part in plain English and get back files a machine shop can use.",
+        "line": "Describe a part in plain English. Chisel writes the CAD code, runs it, and fixes its own mistakes.",
         "accent": "#FF4D0A",
         "codeUrl": "https://github.com/n8v1ct0r/chisel.ai"
       },
       {
         "id": "sherlock",
         "name": "Sherlock Holmes AI",
-        "line": "A team of AI investigators. Point them at a company, a person or a question, and get a sourced report back.",
+        "line": "Ask a research question. It splits it into smaller ones, searches the web, and writes up a report with its sources.",
         "accent": "#C6F432",
         "codeUrl": "https://github.com/n8v1ct0r/sherlock-holmes.ai"
       }
