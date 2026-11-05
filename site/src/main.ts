@@ -1,26 +1,15 @@
 import "./style.css";
-import { startSwarm } from "./swarm";
+import { startHero } from "./hero";
 
-document.documentElement.classList.add("js");
-const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
+// The inline script in index.html adds .js and, unless reduced motion or Save-Data is on, .motion.
+const root = document.documentElement;
+root.classList.add("js");
+const noMotion = !root.classList.contains("motion");
 
-// Clock: real local time in Red Bank, NJ.
-const clock = document.querySelector("[data-clock]");
-const fmt = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false });
-const tickClock = () => { if (clock) clock.textContent = fmt.format(new Date()); };
-tickClock();
-setInterval(tickClock, 1000);
-
-// Hero swarm starts after first paint so the text is always the LCP.
-const canvas = document.querySelector<HTMLCanvasElement>(".swarm");
+// Hero starts after load so the text and the still image are the first paint.
+const hero = document.querySelector<HTMLElement>(".hero");
 const boot = () => {
-  if (!canvas) return;
-  startSwarm(canvas, {
-    agents: document.querySelector('[data-hud="agents"]'),
-    fps: document.querySelector('[data-hud="fps"]'),
-    state: document.querySelector('[data-hud="state"]'),
-  }, { still: reduced || saveData }).catch(() => { /* image failed: the hero stays text only */ });
+  if (hero) startHero(hero, !noMotion);
 };
 if (document.readyState === "complete") requestAnimationFrame(() => setTimeout(boot, 0));
 else addEventListener("load", () => setTimeout(boot, 0), { once: true });
@@ -37,69 +26,223 @@ if (bar && menuBtn) {
   };
   menuBtn.addEventListener("click", () => setMenu(bar.dataset.menu !== "open"));
   bar.querySelectorAll("nav a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
-  addEventListener("keydown", (e) => { if (e.key === "Escape" && bar.dataset.menu === "open") { setMenu(false); menuBtn.focus(); } });
-  matchMedia("(min-width: 961px)").addEventListener("change", (m) => { if (m.matches) setMenu(false); });
+  addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && bar.dataset.menu === "open") {
+      setMenu(false);
+      menuBtn.focus();
+    }
+  });
+  matchMedia("(min-width: 961px)").addEventListener("change", (m) => {
+    if (m.matches) setMenu(false);
+  });
 }
 
-// Rows fade up once as they enter. Everything renders visible by default: the hide is only
-// armed on the first real scroll, and only for rows still below the fold at that moment.
-// Screenshots, link previews and crawlers that never scroll always see the full page.
-const rows = document.querySelectorAll<HTMLElement>(".build, .quest, .entry, .lessons li, .about, .closing p, .closing .cta");
-if (!reduced && "IntersectionObserver" in window) {
+const finePointer = matchMedia("(hover: hover) and (pointer: fine)");
+
+// Reveals and count-ups. Everything renders visible by default: the hide is only armed on the
+// first real scroll, and only for blocks still below the fold at that moment. Screenshots, link
+// previews and crawlers that never scroll always see the full page.
+const revealables = document.querySelectorAll<HTMLElement>(".sec-h, .build, .qc, .more-h, .entry, .about, .closing p, .closing .cta");
+const counters = document.querySelectorAll<HTMLElement>(".count");
+if (!noMotion && "IntersectionObserver" in window) {
   const arm = () => {
-    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
-    rows.forEach((r) => { if (r.getBoundingClientRect().top > innerHeight) { r.classList.add("reveal"); io.observe(r); } });
+    // Blocks entering together are staggered 80ms apart (capped at 320ms).
+    const revealIO = new IntersectionObserver(
+      (entries) => {
+        entries
+          .filter((e) => e.isIntersecting)
+          .forEach((e, i) => {
+            const el = e.target as HTMLElement;
+            el.style.setProperty("--d", `${Math.min(i, 4) * 80}ms`);
+            el.classList.add("in");
+            revealIO.unobserve(el);
+          });
+      },
+      { rootMargin: "0px 0px -8% 0px" },
+    );
+    revealables.forEach((el) => {
+      if (el.getBoundingClientRect().top > innerHeight) {
+        el.classList.add("reveal");
+        revealIO.observe(el);
+      }
+    });
+
+    const countIO = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          countIO.unobserve(e.target);
+          countUp(e.target as HTMLElement);
+        }),
+      { threshold: 1 },
+    );
+    counters.forEach((el) => {
+      if (el.getBoundingClientRect().top <= innerHeight) return;
+      el.dataset.final = el.textContent ?? "";
+      el.textContent = formatCount(el, 0);
+      countIO.observe(el);
+    });
   };
   addEventListener("scroll", arm, { once: true, passive: true });
 }
 
-// Sidequest hover preview: a square card parked beside the hovered row's title.
-// It never covers the title or the row's actions; if there is no room, it stays closed.
-const preview = document.querySelector<HTMLElement>("[data-preview]");
-const strip = preview?.querySelector<HTMLElement>(".strip");
-const list = document.querySelector<HTMLElement>("[data-quests]");
-const canHover = matchMedia("(hover: hover) and (min-width: 961px)");
-if (preview && strip && list) {
-  const quests = [...list.querySelectorAll<HTMLElement>(".quest")];
-  const GAP = 28;
-  // Beside the title: start right of it, then sit above the row's own text and meta
-  // (over the dimmed neighbour), or below it if the top of the viewport is in the way.
-  const place = (q: HTMLElement) => {
-    const t = q.querySelector<HTMLElement>(".q-title")!.getBoundingClientRect();
-    const size = preview.offsetWidth;
-    const left = t.right + GAP;
-    const acts = q.querySelector<HTMLElement>(".q-acts")?.getBoundingClientRect();
-    const limit = (acts ? acts.left : q.getBoundingClientRect().right) - GAP;
-    if (left + size > limit) return false;
-    const blocks = [...q.querySelectorAll<HTMLElement>(".q-line, .q-status, .q-data, .q-acts")]
-      .map((el) => el.getBoundingClientRect())
-      .filter((r) => r.width && r.right > left && r.left < left + size);
-    const above = Math.min(t.top + t.height / 2 + size / 2, ...blocks.map((r) => r.top - 12)) - size;
-    const below = Math.max(t.top + t.height / 2 - size / 2, ...blocks.map((r) => r.bottom + 12));
-    const top = above >= 72 ? above : below + size <= innerHeight - 8 ? below : NaN;
-    if (Number.isNaN(top)) return false;
-    preview.style.transform = `translate3d(${left}px, ${top}px, 0)`;
-    return true;
+// "$23K+" style label for a running value.
+function formatCount(el: HTMLElement, n: number) {
+  const pre = el.dataset.pre ?? "";
+  if (n < 1e3) return `${pre}${Math.round(n)}+`;
+  if (n < 1e6) return `${pre}${Math.floor(n / 1e3)}K+`;
+  return `${pre}${Math.floor(n / 1e6)}M+`;
+}
+
+// Counts from 0 to data-to (in data-unit) over 1.4s with an ease-out-expo, then restores the exact text.
+function countUp(el: HTMLElement) {
+  const target = Number(el.dataset.to) * (el.dataset.unit === "M" ? 1e6 : 1e3);
+  const final = el.dataset.final ?? el.textContent ?? "";
+  el.style.minWidth = "5ch";
+  el.style.textAlign = "right";
+  const DURATION = 1400;
+  const start = performance.now();
+  const tick = (now: number) => {
+    const p = Math.min(1, (now - start) / DURATION);
+    const eased = 1 - Math.pow(2, -10 * p);
+    el.textContent = p < 1 ? formatCount(el, target * eased) : final;
+    if (p < 1) requestAnimationFrame(tick);
+    else {
+      el.style.minWidth = "";
+      el.style.textAlign = "";
+      el.classList.add("done");
+    }
   };
-  let cur: HTMLElement | null = null;
-  const close = () => { preview.dataset.open = "false"; cur = null; };
-  quests.forEach((q, i) => {
-    q.addEventListener("pointerenter", (e) => {
-      if (!canHover.matches || e.pointerType === "touch") return;
-      const wasOpen = preview.dataset.open === "true";
-      preview.dataset.glide = wasOpen ? "true" : "false";
-      if (!place(q)) return close();
-      cur = q;
-      strip.style.transform = `translateY(${-i * 100 / quests.length}%)`;
-      preview.dataset.open = "true";
-      preview.dataset.active = q.dataset.quest;
+  requestAnimationFrame(tick);
+}
+
+// Aura: pause the drifting gradients while their section group is off screen.
+if (!noMotion && "IntersectionObserver" in window) {
+  document.querySelectorAll<HTMLElement>("[data-aura]").forEach((aura) => {
+    if (!aura.parentElement) return;
+    new IntersectionObserver(([entry]) => {
+      aura.dataset.paused = String(!entry.isIntersecting);
+    }).observe(aura.parentElement);
+  });
+}
+
+// Timeline rail fills as the list passes 70% of the viewport height.
+const rail = document.querySelector<HTMLElement>("[data-rail]");
+const log = document.querySelector<HTMLElement>("[data-log]");
+if (rail && log && !noMotion) {
+  let raf = 0;
+  const update = () => {
+    raf = 0;
+    const r = log.getBoundingClientRect();
+    const progress = Math.min(1, Math.max(0, (innerHeight * 0.7 - r.top) / r.height));
+    rail.style.setProperty("--p", progress.toFixed(4));
+  };
+  const schedule = () => {
+    if (!raf) raf = requestAnimationFrame(update);
+  };
+  addEventListener("scroll", schedule, { passive: true });
+  addEventListener("resize", schedule, { passive: true });
+  update();
+}
+
+const cards = [...document.querySelectorAll<HTMLElement>(".qc")];
+
+// Card clips: with a fine pointer a clip plays while hovered (and on screen); on touch it plays
+// while at least half the card is visible. The poster stays until the clip is actually playing.
+if (!noMotion) {
+  type Clip = { video: HTMLVideoElement; frame: HTMLElement; hovered: boolean; visible: number };
+  const clips = new Map<Element, Clip>();
+  cards.forEach((card) => {
+    const video = card.querySelector<HTMLVideoElement>("video[data-clip]");
+    const frame = card.querySelector<HTMLElement>(".qc-media");
+    if (!video || !frame) return;
+    clips.set(card, { video, frame, hovered: false, visible: 0 });
+    video.addEventListener("playing", () => {
+      frame.dataset.playing = "true";
+    });
+    // No playable source: drop the video so the poster is all that remains.
+    video.querySelectorAll("source").forEach((source) =>
+      source.addEventListener("error", () => {
+        if (video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) video.remove();
+      }),
+    );
+  });
+
+  const sync = (card: Element) => {
+    const clip = clips.get(card);
+    if (!clip || !clip.video.isConnected) return;
+    const play = clip.visible > 0 && (finePointer.matches ? clip.hovered : clip.visible >= 0.5);
+    if (play && clip.video.paused) clip.video.play().catch(() => {});
+    else if (!play && !clip.video.paused) clip.video.pause();
+    if (!play && finePointer.matches) clip.frame.dataset.playing = "false";
+  };
+
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          const clip = clips.get(e.target);
+          if (!clip) return;
+          clip.visible = e.isIntersecting ? e.intersectionRatio : 0;
+          sync(e.target);
+        }),
+      { threshold: [0, 0.5, 0.75] },
+    );
+    clips.forEach((_, card) => io.observe(card));
+  }
+
+  cards.forEach((card) => {
+    const clip = clips.get(card);
+    if (!clip) return;
+    card.addEventListener("pointerenter", (e) => {
+      if (e.pointerType === "touch") return;
+      clip.hovered = true;
+      sync(card);
+    });
+    card.addEventListener("pointerleave", () => {
+      clip.hovered = false;
+      sync(card);
     });
   });
-  list.addEventListener("pointerleave", close);
-  // Wheel scrolling under a still pointer: keep the card pinned to its row, or close it.
-  addEventListener("scroll", () => {
-    if (!cur) return;
-    preview.dataset.glide = "false";
-    if (!cur.matches(":hover") || !place(cur)) close();
-  }, { passive: true });
+}
+
+if (!noMotion) {
+  // Card pointer light: a soft accent spot follows the mouse inside each card.
+  cards.forEach((card) => {
+    const light = card.querySelector<HTMLElement>(".qc-light i");
+    if (!light) return;
+    let raf = 0;
+    let x = 0;
+    let y = 0;
+    card.addEventListener("pointermove", (e) => {
+      if (!finePointer.matches || e.pointerType === "touch") return;
+      const r = card.getBoundingClientRect();
+      x = e.clientX - r.left;
+      y = e.clientY - r.top;
+      if (!raf)
+        raf = requestAnimationFrame(() => {
+          raf = 0;
+          light.style.setProperty("--lx", `${x}px`);
+          light.style.setProperty("--ly", `${y}px`);
+        });
+    });
+  });
+
+  // Magnetic buttons: drift up to 4px x 3px toward the pointer (CSS reads --tx/--ty).
+  document.querySelectorAll<HTMLElement>("[data-magnet]").forEach((el) => {
+    el.addEventListener("pointermove", (e) => {
+      if (!finePointer.matches || e.pointerType === "touch") return;
+      const r = el.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+      const dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+      el.dataset.magnetOn = "";
+      el.style.setProperty("--tx", `${(dx * 4).toFixed(2)}px`);
+      el.style.setProperty("--ty", `${(dy * 3).toFixed(2)}px`);
+    });
+    el.addEventListener("pointerleave", () => {
+      delete el.dataset.magnetOn;
+      el.style.setProperty("--tx", "0px");
+      el.style.setProperty("--ty", "0px");
+    });
+  });
 }
