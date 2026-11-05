@@ -37,10 +37,10 @@
       {
         "id": "race-engineer",
         "name": "AI Race Engineer",
-        "line": "Pick two F1 drivers and see exactly where one gained time on the other, corner by corner, from real telemetry.",
+        "line": "Two real qualifying laps, replayed side by side. See which corners won the lap and which gave time away.",
         "accent": "#B6F23A",
         "status": "Live",
-        "data": "Recorded F1 telemetry",
+        "data": "Recorded FastF1 session",
         "demoUrl": "https://race-engineer-tau.vercel.app",
         "codeUrl": "https://github.com/n8v1ct0r/race-engineer",
         "featured": true
@@ -48,10 +48,10 @@
       {
         "id": "argus",
         "name": "Argus",
-        "line": "A live view of Earth with an AI analyst. Every sentence it writes links back to the event behind it.",
+        "line": "Replay a day of quakes, fires, flights and satellites on a globe. Click any sentence in the brief to see the record behind it.",
         "accent": "#3EC6FF",
         "status": "In progress",
-        "data": "Public feeds",
+        "data": "Recorded public feeds",
         "demoUrl": "https://argus-seven-eta.vercel.app",
         "codeUrl": null,
         "featured": true
@@ -59,17 +59,17 @@
       {
         "id": "photoncar",
         "name": "Photoncar",
-        "line": "Turns a car's raw engine data into plain-English moments, like a hard brake or a quick launch.",
+        "line": "Car data you can check. Click a hard stop or a 0 to 60 run and see the exact readings behind it.",
         "accent": "#FFC83D",
         "status": "Live",
-        "data": "Recorded drive",
+        "data": "Recorded public drive",
         "demoUrl": "https://photoncar.vercel.app",
         "codeUrl": "https://github.com/n8v1ct0r/photoncar"
       },
       {
         "id": "imperium",
         "name": "Imperium",
-        "line": "Mission control for a drone fleet. The drones ask before they act, and you approve or deny.",
+        "line": "Simulated drones search for a raft on their own. When one wants to leave its route, it has to ask you first.",
         "accent": "#8B7BFF",
         "status": "In progress",
         "data": "Simulated mission",
@@ -79,17 +79,17 @@
       {
         "id": "claude-learner",
         "name": "Claude Learner",
-        "line": "Bite-size lessons for learning Claude. You finish each one by explaining the idea back in your own words.",
+        "line": "Prep for the Claude Certified Architect exam in a few minutes a day. Answer questions, then explain the idea back in one sentence.",
         "accent": "#E8693A",
         "status": "In progress",
-        "data": "Demo mode",
+        "data": "Offline demo",
         "demoUrl": "https://claude-learner.vercel.app",
         "codeUrl": "https://github.com/n8v1ct0r/claude-learner"
       },
       {
         "id": "usvc",
         "name": "USVC for iOS",
-        "line": "An unofficial iPhone app concept for usvc.com that you can tap through in the browser. Not affiliated with USVC.",
+        "line": "What if USVC had an iPhone app? An unofficial concept you can tap through in your browser, on sample data.",
         "accent": "#F2F2F2",
         "status": "In progress",
         "data": "Sample data",
